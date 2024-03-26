@@ -2,9 +2,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner leer=new Scanner(System.in);
-        int opcion;
-        Personal Empleado=null;
+        int opcion;Personal Empleado;Personal Empleado2=new Personal();
+
         for (boolean band=false;band==false;){
+
             System.out.println("Ingrese su opcion");
             opcion=leer.nextInt();
             switch (opcion){
@@ -30,10 +31,10 @@ public class Main {
                     System.out.print("\nIngrese Horario:");
                     String horario=leer.nextLine();
                     Empleado=new Personal(name,apellido,FechaDeNacimiento,RFC,salario,rol,FechaDeIngreso,CURP,horario);
-                    Empleado.RegistrarEmpleado(Empleado);
+                    Empleado2.RegistrarEmpleado(Empleado);
                     break;
                 case 2:
-                    Empleado.MostrarEmpleados();
+                    Empleado2.MostrarEmpleados();
                     break;
             }
 
