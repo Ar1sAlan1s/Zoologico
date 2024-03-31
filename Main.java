@@ -3,10 +3,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner leer=new Scanner(System.in);
         int opcion;Personal Empleado;Personal Empleado2=new Personal();
-
+        Visitantes visitante;
+        Visitantes visitantes = new Visitantes(" ", " ", " ", " ", " ");
         for (boolean band=false;band==false;){
 
             System.out.println("Ingrese su opcion");
+            System.out.println("3. Añadir Visitante o aumentar sus visitas con su CURP.");
+            System.out.println("4. Mostrar a todos los visitantes registrados en el sistema.");
+            System.out.println("5. Mostrar a un solo visitante.");
             opcion=leer.nextInt();
             switch (opcion){
                 case 1:
@@ -36,9 +40,35 @@ public class Main {
                 case 2:
                     Empleado2.MostrarEmpleados();
                     break;
+                case 3: 
+                leer.nextLine();
+                System.out.println("¿Es su primera visita?(Si o No): ");
+                String resp = leer.nextLine();
+                if(resp.equalsIgnoreCase("si")){
+                System.out.println("Ingresar nombre del Visitante: ");
+                String nombre = leer.nextLine();
+                System.out.println("Ingresar apellidos del Visitante:  ");
+                String apellidos = leer.nextLine();
+                System.out.println("Ingresa su fecha de nacimiento: ");      
+                String fechaNacimiento = leer.nextLine();
+                System.out.println("Ingresa su CURP: ");
+                String curp = leer.nextLine();
+                System.out.println("Ingresar Fecha de Registro: ");
+                String fechaRegistro = leer.nextLine();
+                visitante = new Visitantes(nombre, apellidos, fechaNacimiento, curp, fechaRegistro);
+                visitantes.añadirVisitante(visitante);
+                }
+                else{ 
+                    visitantes.aumentarVisitas();   
+                }
+                break;
+                case 4: 
+                    visitantes.mostrarVisitantes();
+                    break;
+                case 5: 
+                    visitantes.getDatosVisitante();
+                    break;
             }
-
-
         }
 
     }
