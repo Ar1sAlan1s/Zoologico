@@ -44,6 +44,22 @@ public class Visitantes {
     public void añadirVisitante(Visitantes visitantes){
         visitante.add(visitantes);
     }
+    public void eliminarVisitante() {
+        System.out.println("Proporcione la CURP del visitante que desea eliminar: ");
+        String curp = sc.next();
+        int indiceVisitante = buscarVisitantePorCURP(curp);
+
+        if (indiceVisitante != -1) {
+            if (visitantes.get(indiceVisitante).getNumVisitas() == 0) {
+                visitantes.remove(indiceVisitante);
+                System.out.println("El visitante con la CURP " + curp + " ha sido eliminado exitosamente.");
+            } else {
+                System.out.println("No se puede eliminar el visitante, ya que tiene visitas registradas.");
+            }
+        } else {
+            System.out.println("No se encontró ningún visitante con esa CURP.");
+        }
+    }
     public void mostrarVisitantes(){
         for (Visitantes visitantes : visitante){
             System.out.println("-------------------------------");
