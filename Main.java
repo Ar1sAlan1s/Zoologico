@@ -18,16 +18,17 @@ public class Main {
             System.out.println("1. Registrar Empleados");
             System.out.println("2. Mostrar Empleados");
             System.out.println("3. Quitar Empleados");
-            System.out.println("4. Registar visitantes");
-            System.out.println("5. Mostrar lista de visitantes");
-            System.out.println("6. Mostrar Visitante en especifico");
-            System.out.println("7. Registrar Visita");
-            System.out.println("8. Mostrar todas las visitas");
-            System.out.println("9. Mostrar la informacion detallada de una visita en especifico");
-            System.out.println("10. Registrar mantenimiento");
-            System.out.println("11. Mostrar Manteniientos");
-            System.out.println("12. Mostrar Informacion de un Mantenimieno en especifico");
-            System.out.println("13. salir del programa");
+            System.out.println("4. Registar Visitantes");
+            System.out.println("5. Mostrar lista de Visitantes");
+            System.out.println("6. Eliminar Visitante");
+            System.out.println("7. Mostrar Visitante en especifico");
+            System.out.println("8. Registrar Visita");
+            System.out.println("9. Mostrar todas las visitas");
+            System.out.println("10. Mostrar la informacion detallada de una visita en especifico");
+            System.out.println("11. Registrar Mantenimiento");
+            System.out.println("12. Mostrar Mantenimientos");
+            System.out.println("13. Mostrar Informacion de un Mantenimieno en especifico");
+            System.out.println("14. salir del programa");
             System.out.println("Ingrese su opcion");
             opcion = leer.nextInt();
             switch (opcion) {
@@ -37,7 +38,6 @@ public class Main {
                 case 2:
                     Empleado2.MostrarEmpleados();
                     break;
-
                 case 3:
                     Empleado2.QuitarEmpleados();
                     break;
@@ -61,28 +61,37 @@ public class Main {
                     visitantes.mostrarVisitantes();
                     break;
                 case 6:
-                    System.out.println("eliminar visitantes");
+                    visitantes.eliminarVisitante()
                     break;
-                case 7: control.RegistarVisitas();
+                case 7: 
+                    visitantes.getDatosVisitante();
                     break;
-                case 8: control.mostrarTodasLasVisitas();
-                case 9:
+                case 8: 
+                    control.RegistarVisitas();
+                    break;
+                case 9: 
+                    control.mostrarTodasLasVisitas();
+                    break;
+                case 10:
                     leer.nextLine();
                     System.out.println("ingrese la fecha de la visita con la forma: Dia/Mes/año");
                     fechaRegistro= leer.nextLine();
                     control.imprimirInformacionVisita(fechaRegistro);
                     break;
-                case 10:
+                case 11:
                     control.registrarMantenimiento();
                     break;
-                case 11: control.imprimirMantenimientos();
+                case 12: control.imprimirMantenimientos();
                     break;
-                case 12:
+                case 13:
                     leer.nextLine();
                     System.out.println("ingrese la fecha que se realizo el mantenimiento");
                     String fecha=leer.nextLine();
                     control.consultarMantenimientoPorFecha(fecha);
-                case 13: band=true;
+                    break;
+                case 14: 
+                    System.out.println("----Saliendo del Sistema.----");
+                    band=true;
                     break;
             }
         }
