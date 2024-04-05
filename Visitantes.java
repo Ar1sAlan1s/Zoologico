@@ -50,8 +50,8 @@ public class Visitantes {
         int indiceVisitante = buscarVisitantePorCURP(curp);
 
         if (indiceVisitante != -1) {
-            if (visitantes.get(indiceVisitante).getNumVisitas() == 0) {
-                visitantes.remove(indiceVisitante);
+            if (visitante.get(indiceVisitante).getNumVisitas() == 0) {
+                visitante.remove(indiceVisitante);
                 System.out.println("El visitante con la CURP " + curp + " ha sido eliminado exitosamente.");
             } else {
                 System.out.println("No se puede eliminar el visitante, ya que tiene visitas registradas.");

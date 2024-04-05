@@ -1,11 +1,13 @@
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+
         Scanner leer = new Scanner(System.in);
         control control=new control();
         String Password = "Hola";
         int opcion;
         Personal Empleado2 = new Personal();
+        Animales animales = new Animales();
         Visitantes visitantes=new Visitantes(" ", "" , 0, "","");
         System.out.print("Ingrese la contraseña:");
         String pass = leer.nextLine();
@@ -28,7 +30,11 @@ public class Main {
             System.out.println("11. Registrar Mantenimiento");
             System.out.println("12. Mostrar Mantenimientos");
             System.out.println("13. Mostrar Informacion de un Mantenimieno en especifico");
-            System.out.println("14. salir del programa");
+            System.out.println("14. Registrar Animal");
+            System.out.println("15. Mostrar Animales");
+            System.out.println("16. Eliminar Animal");
+            System.out.println("17. Buscar Animal por ID");
+            System.out.println("18. salir del programa");
             System.out.println("Ingrese su opcion");
             opcion = leer.nextInt();
             switch (opcion) {
@@ -61,7 +67,7 @@ public class Main {
                     visitantes.mostrarVisitantes();
                     break;
                 case 6:
-                    visitantes.eliminarVisitante()
+                    visitantes.eliminarVisitante();
                     break;
                 case 7: 
                     visitantes.getDatosVisitante();
@@ -69,7 +75,7 @@ public class Main {
                 case 8: 
                     control.RegistarVisitas();
                     break;
-                case 9: 
+                case 9:
                     control.mostrarTodasLasVisitas();
                     break;
                 case 10:
@@ -89,7 +95,20 @@ public class Main {
                     String fecha=leer.nextLine();
                     control.consultarMantenimientoPorFecha(fecha);
                     break;
-                case 14: 
+
+                case 14:
+                    animales.RegistrarAnimal();
+                    break;
+                case 15:
+                    animales.MostrarAnimales();
+                    break;
+                case 16:
+                    animales.EliminarAnimal();
+                    break;
+                case 17:
+                    animales.BuscarAnimalPorID();
+                    break;
+                case 18:
                     System.out.println("----Saliendo del Sistema.----");
                     band=true;
                     break;
