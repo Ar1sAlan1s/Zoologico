@@ -1,5 +1,6 @@
-
+import control
 import sys
+import Animales
 
 class Visitantes:
     def __init__(self, nombre, apellidos, fechaNacimiento, curp, fechaRegistro):
