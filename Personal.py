@@ -1,6 +1,3 @@
-
-import datetime
-
 class Personal:
     def __init__(self, name, apellido, fecha_de_nacimiento, rfc, salario, rol, fecha_de_ingreso, curp, horario):
         self.name = name
