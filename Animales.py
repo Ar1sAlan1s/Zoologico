@@ -23,21 +23,21 @@ class AnimalManager:
         self.scanner = input
 
     def register_animal(self):
-        animal_type = input("Enter animal type: ")
+        animal_type = input("Ingrese tipo de animal: ")
         id = random.randint(1, 200)
         self.validate_id(id)
-        birth_date = input("\nEnter birth date in the format Day/Month/Year: ")
-        arrival_date = input("\nEnter arrival date in the format Day/Month/Year: ")
-        weight = float(input("\nEnter weight: "))
-        feeding_frequency = input("\nEnter feeding frequency: ")
-        feeding_types = input("\nEnter feeding types: ")
-        vaccinated = input("\nHas vaccinations 'Yes' No vaccinations 'No': ")
+        birth_date = input("\n Ingrese fecha de nacimiento dia/mes/año: ")
+        arrival_date = input("\nIngrese fecha de llegada dia/mes/año: ")
+        weight = float(input("\nIngrese peso: "))
+        feeding_frequency = input("\nIngrese fecuencia de alimentacion: ")
+        feeding_types = input("\nIngrese tipos de alimentacion: ")
+        vaccinated = input("\nVacunado 'Yes' No vacunado 'No': ")
         vaccinated = vaccinated == "Yes"
         diseases = []
-        disease = input("\nEnter diseases, when finished enter 'Fin': ")
+        disease = input("\nIngrese enfermedad cuando acabe ingrese 'Fin': ")
         while disease != "Fin":
             diseases.append(disease)
-            disease = input("Enter disease: ")
+            disease = input("Ingresa enfermedad: ")
 
         animal = Animales(animal_type, id, birth_date, arrival_date, weight, feeding_frequency, feeding_types, vaccinated)
         animal.set_diseases(diseases)
@@ -45,16 +45,16 @@ class AnimalManager:
 
     def display_animals(self):
         for animal in self.animals:
-            print(f"Animal type: {animal.animal_type}")
+            print(f"Tipo de animal: {animal.animal_type}")
             print(f"ID: {animal.id}")
-            print(f"Birth date: {animal.birth_date}")
-            print(f"Arrival date: {animal.arrival_date}")
-            print(f"Weight: {animal.weight:.2f} kg")
-            print(f"Feeding frequency: {animal.feeding_frequency}")
-            print(f"Feeding types: {animal.feeding_types}")
-            print(f"Vaccinated: {animal.vaccinated}")
+            print(f"Fecha de nacimiento: {animal.birth_date}")
+            print(f"Fecha de llegada: {animal.arrival_date}")
+            print(f"Peso: {animal.weight:.2f} kg")
+            print(f"Frecuencia de alimentacion: {animal.feeding_frequency}")
+            print(f"Tipo de Alimentacion: {animal.feeding_types}")
+            print(f"Vacunado: {animal.vaccinated}")
             for i, disease in enumerate(animal.diseases):
-                print(f"Disease {i+1}: {disease}")
+                print(f"Enfermedad {i+1}: {disease}")
 
     def validate_id(self, id: int):
         for animal in self.animals:
@@ -66,24 +66,24 @@ class AnimalManager:
     def delete_animal(self):
         for i, animal in enumerate(self.animals):
             print(f"\n{i+1} Animal: {animal.animal_type}")
-        option = int(input("Enter the number of the animal to delete: "))
+        option = int(input("Ingrese el numero del animal a eliminar: "))
         self.animals.pop(option-1)
 
     def search_animal_by_id(self):
-        id = int(input("Enter the animal ID: "))
+        id = int(input("Ingrese el ID del animal a buscar: "))
         print()
         for animal in self.animals:
             if animal.id == id:
-                print(f"Animal type: {animal.animal_type}")
+                print(f"Tipo de animal: {animal.animal_type}")
                 print(f"ID: {animal.id}")
-                print(f"Birth date: {animal.birth_date}")
-                print(f"Arrival date: {animal.arrival_date}")
-                print(f"Weight: {animal.weight:.2f} kg")
-                print(f"Feeding frequency: {animal.feeding_frequency}")
-                print(f"Feeding types: {animal.feeding_types}")
-                print(f"Vaccinated: {animal.vaccinated}")
+                print(f"Fecha de nacimiento: {animal.birth_date}")
+                print(f"Fecha de llegada: {animal.arrival_date}")
+                print(f"Peso: {animal.weight:.2f} kg")
+                print(f"Frecuencia de alimentacion: {animal.feeding_frequency}")
+                print(f"Tipo de Alimentacio: {animal.feeding_types}")
+                print(f"Vacunado: {animal.vaccinated}")
                 for i, disease in enumerate(animal.diseases):
-                    print(f"Disease {i+1}: {disease}")
+                    print(f"Enfermedad {i+1}: {disease}")
 
 if __name__ == "__main__":
     animal_manager = AnimalManager()
