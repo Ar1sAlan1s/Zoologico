@@ -1,10 +1,14 @@
+from Visitantes import Visitantes
+from Animales import AnimalManager
+from Personal import Personal
+from datetime import datetime
 class Control:
     def __init__(self):
         self.mantenimiento = None
         self.empleado = Personal()
         self.visita = Visita("", self.empleado, 0, 0, 0)
-        self.leer = Scanner()
         self.visitantes = Visitantes("", "", 0, "", "")
+        self.leer = input()
         self.lista_de_visitas = []
         self.lista_de_mantenimientos = []
 
@@ -16,13 +20,13 @@ class Control:
 
     def registrar_visitas(self):
         print("Ingrese la fecha del recorrido con la siguiente estructura: día/mes/año")
-        fecha_de_recorrido = self.leer.next_line()
+        fecha_de_recorrido = self.leer
 
         guia = None
         guia_encontrado = False
         while not guia_encontrado:
             print("Ingrese el CURP del guía que dará el recorrido:")
-            curp_guia = self.leer.next_line().upper()
+            curp_guia = self.leer.upper()
             indice_empleado = self.buscar_empleado_por_curp(curp_guia)
             if indice_empleado != -1:
                 rol = self.empleado.personal[indice_empleado].rol
@@ -31,12 +35,12 @@ class Control:
                     guia_encontrado = True
                 else:
                     print("Este empleado no puede realizar esa acción.")
-                    opcion = self.leer.next_int()
+                    opcion = self.leer
                     if opcion == 1:
                         return
             else:
                 print("Empleado no encontrado. Asegúrese de anotar correctamente el CURP.")
-                opcion = self.leer.next_int()
+                opcion = self.leer
                 if opcion == 1:
                     return
 
@@ -46,10 +50,10 @@ class Control:
         agregar_visitante = True
         while agregar_visitante:
             print("Ingrese la CURP del visitante:")
-            curp_visitante = self.leer.next_line().upper()
-            indice_visitante = self.visitantes.buscar_visitante_por_curp(curp_visitante)
+            curp_visitante = self.leer.upper()
+            indice_visitante = self.visitantes.buscarVisitantePorCURP( curp_visitante)
             if indice_visitante != -1:
-                visitante = self.visitantes.visitantes[indice_visitante]
+                visitante = self.visitantes.visitante[indice_visitante]
                 visitante.num_visitas += 1
                 if visitante.num_visitas % 5 == 0:
                     visitante.num_visitas = 0
@@ -63,7 +67,7 @@ class Control:
                 print("Visitante no encontrado.")
 
             print("¿Desea agregar otro visitante? (s/n)")
-            respuesta = self.leer.next_line().lower()
+            respuesta = self.leer.lower()
             if respuesta == "n":
                 agregar_visitante = False
 
@@ -122,30 +126,38 @@ class Control:
 
     def registrar_mantenimiento(self):
         print("Ingrese el CURP del empleado que realizará el mantenimiento:")
-        curp_empleado = self.leer.next_line().upper()
+        curp_empleado = self.leer.upper()  # Assuming leer() reads input
         indice_empleado = self.buscar_empleado_por_curp(curp_empleado)
 
         if indice_empleado != -1:
             empleado = self.empleado.personal[indice_empleado]
             if empleado.rol == "MANTENIMIENTO":
                 print("Ingrese el ID del animal:")
-                ID = self.leer.next_int()
-                self.leer.next_line()
+                ID = self.leer
 
                 print("Ingrese el proceso realizado:")
-                proceso_realizado = self.leer.next_line()
+                proceso_realizado = self.leer
 
-                print("Ingrese la fecha del proceso (formato: día/mes/año):")
-                fecha_proceso = self.le
+                while True:
+                    try:
+                        fecha_proceso_str = input("Ingrese la fecha del proceso (formato: día/mes/año): ")
+                        fecha_proceso = datetime.strptime(fecha_proceso_str, "%d/%m/%Y")
+                        break
+                    except ValueError:
+                        print("Formato de fecha incorrecto. Intente de nuevo.")
+            else:
+                print("El empleado no tiene el rol de mantenimiento.")
+        else:
+            print("Empleado no encontrado.")
 
 class Mantenimiento:
     def __init__(self, empleado, ID, proceso_realizado, proceso_que_se_realizo, fecha_de_mantenimiento):
         self.empleado = empleado
-        self.animal = Animales()
+        self.animal = AnimalManager
         self.ID = ID
         self.observaciones = ""
         self.fecha_de_mantenimiento = fecha_de_mantenimiento
-        self.proceso_qu_se_realizo = proceso_que_se_realizo
+        self.proceso_que_se_realizo = proceso_que_se_realizo
 
 class Visita:
     def __init__(self, fecha_de_recorrido, guia, costo_total, num_de_adultos, num_de_niños):
