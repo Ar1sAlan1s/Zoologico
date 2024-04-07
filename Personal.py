@@ -1,73 +1,93 @@
-class Personal:
-    def __init__(self, name, apellido, fecha_de_nacimiento, rfc, salario, rol, fecha_de_ingreso, curp, horario):
-        self.name = name
-        self.apellido = apellido
-        self.fecha_de_nacimiento = fecha_de_nacimiento
-        self.rfc = rfc
-        self.salario = salario
-        self.rol = rol
-        self.fecha_de_ingreso = fecha_de_ingreso
-        self.curp = curp
-        self.horario = horario
+import random
+from typing import List
 
-    def get_name(self):
-        return self.name
+class Animales:
+    def __init__(self, animal_type: str, id: int, birth_date: str, arrival_date: str, weight: float, feeding_frequency: str, feeding_types: str, vaccinated: bool):
+        self.animal_type = animal_type
+        self.id = id
+        self.birth_date = birth_date
+        self.arrival_date = arrival_date
+        self.weight = weight
+        self.feeding_frequency = feeding_frequency
+        self.feeding_types = feeding_types
+        self.vaccinated = vaccinated
+        self.diseases: List[str] = []
 
-    def get_apellido(self):
-        return self.apellido
+    def set_diseases(self, diseases: List[str]):
+        self.diseases = diseases
 
-    def get_fecha_de_nacimiento(self):
-        return self.fecha_de_nacimiento
 
-    def get_rfc(self):
-        return self.rfc
-
-    def get_salario(self):
-        return self.salario
-
-    def get_rol(self):
-        return self.rol
-
-    def get_fecha_de_ingreso(self):
-        return self.fecha_de_ingreso
-
-    def get_curp(self):
-        return self.curp
-
-    def get_horario(self):
-        return self.horario
-
-    def registrar_empleado(self):
-        name = input("Ingrese nombre: ")
-        apellido = input("\nIngrese apellido: ")
-        fecha_de_nacimiento = input("\nIngrese Fecha de nacimiento con el formato Dia/Mes/Año: ")
-        rfc = input("\nIngrese RFC: ")
-        salario = float(input("\nIngrese salario: "))
-        band = False
-        while not band:
-            rol = input("\nIngrese rol: ").upper()
-            if rol in ["VETERINARIO", "GUIA", "MANTENIMIENTO", "ADMINISTRACION"]:
-                fecha_de_ingreso = input("\nIngrese Fecha de ingreso con el formato Dia/Mes/Año: ")
-                curp = input("\nIngrese CURP: ").upper()
-                horario = input("\nIngrese Horario: ")
-                empleado = Personal(name, apellido, fecha_de_nacimiento, rfc, salario, rol, fecha_de_ingreso, curp, horario)
-                self.personal.append(empleado)
-                band = True
-            else:
-                print("ingrese un rol valido")
-
-    def mostrar_empleados(self):
-        for i, empleado in enumerate(self.personal):
-            print(f"Su nombre: {empleado.get_name()}\nSu Apellido: {empleado.get_apellido()}\nSu Fecha de Nacimiento: {empleado.get_fecha_de_nacimiento()}\nSu RFC: {empleado.get_rfc()}\nSu salario: {empleado.get_salario():.2f}\nSu rol: {empleado.get_rol()}\nSu Fecha de ingreso: {empleado.get_fecha_de_ingreso()}\nSu CURP: {empleado.get_curp()}\nSu Horario: {empleado.get_horario()}\n############################\n")
-
-    def quitar_empleados(self):
-        print("La lista de empleados es la siguiente")
-        for i, empleado in enumerate(self.personal):
-            print(f"{i} Su nombre: {empleado.get_name()}\n   Su Apellido: {empleado.get_apellido()}")
-        op = int(input("Ingrese el índice del empleado a eliminar: "))
-        del self.personal[op]
-        print("\nSe eliminó exitosamente el trabajador")
-
+class AnimalManager:
     def __init__(self):
-        self.personal = []
+        self.animals: List[Animales] = []
+        self.scanner = input
 
+    def register_animal(self):
+        animal_type = input("Enter animal type: ")
+        id = random.randint(1, 200)
+        self.validate_id(id)
+        birth_date = input("\nEnter birth date in the format Day/Month/Year: ")
+        arrival_date = input("\nEnter arrival date in the format Day/Month/Year: ")
+        weight = float(input("\nEnter weight: "))
+        feeding_frequency = input("\nEnter feeding frequency: ")
+        feeding_types = input("\nEnter feeding types: ")
+        vaccinated = input("\nHas vaccinations 'Yes' No vaccinations 'No': ")
+        vaccinated = vaccinated == "Yes"
+        diseases = []
+        disease = input("\nEnter diseases, when finished enter 'Fin': ")
+        while disease != "Fin":
+            diseases.append(disease)
+            disease = input("Enter disease: ")
+
+        animal = Animales(animal_type, id, birth_date, arrival_date, weight, feeding_frequency, feeding_types, vaccinated)
+        animal.set_diseases(diseases)
+        self.animals.append(animal)
+
+    def display_animals(self):
+        for animal in self.animals:
+            print(f"Tipo de animal: {animal.animal_type}")
+            print(f"ID: {animal.id}")
+            print(f"Fecha de nacimiento: {animal.birth_date}")
+            print(f"Fecha de llegada: {animal.arrival_date}")
+            print(f"Peso: {animal.weight:.2f} kg")
+            print(f"Frecuencia de alimentacion: {animal.feeding_frequency}")
+            print(f"Tipo de Alimentacion: {animal.feeding_types}")
+            print(f"Vacunado: {animal.vaccinated}")
+            for i, disease in enumerate(animal.diseases):
+                print(f"Enfermedad {i+1}: {disease}")
+
+    def validate_id(self, id: int):
+        for animal in self.animals:
+            if animal.id == id:
+                id = random.randint(1, 200)
+                self.validate_id(id)
+                return
+
+    def delete_animal(self):
+        for i, animal in enumerate(self.animals):
+            print(f"\n{i+1} Animal: {animal.animal_type}")
+        option = int(input("Ingrese el numero del animal a eliminar: "))
+        self.animals.pop(option-1)
+
+    def search_animal_by_id(self):
+        id = int(input("Ingrese el ID del animal a buscar: "))
+        print()
+        for animal in self.animals:
+            if animal.id == id:
+                print(f"Tipo de animal: {animal.animal_type}")
+                print(f"ID: {animal.id}")
+                print(f"Fecha de nacimiento: {animal.birth_date}")
+                print(f"Fecha de llegada: {animal.arrival_date}")
+                print(f"Peso: {animal.weight:.2f} kg")
+                print(f"Frecuencia de alimentacion: {animal.feeding_frequency}")
+                print(f"Tipo de Alimentacio: {animal.feeding_types}")
+                print(f"Vacunado: {animal.vaccinated}")
+                for i, disease in enumerate(animal.diseases):
+                    print(f"Enfermedad {i+1}: {disease}")
+
+if __name__ == "__main__":
+    animal_manager = AnimalManager()
+    animal_manager.register_animal()
+    animal_manager.display_animals()
+    animal_manager.delete_animal()
+    animal_manager.search_animal_by_id()
